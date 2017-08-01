@@ -10,7 +10,7 @@ import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
  *
  * 1 de ago de 2017
  */
-public class FinancialTransferDTO {
+public class FinancialTransferScheduleDTO{
 	
 	private String origenAcc;
 	private String destAcc;
