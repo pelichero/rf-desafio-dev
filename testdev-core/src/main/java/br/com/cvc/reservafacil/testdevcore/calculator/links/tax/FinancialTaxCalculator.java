@@ -22,7 +22,7 @@ public class FinancialTaxCalculator extends FinancialCalculatorChain<FinancialTr
 	private FinancialCalculatorFactory factory;
 
 	public FinancialTaxCalculator(){
-		super(new FinancialTaxCalculator());
+		super(null);
 	}
 	
 	public FinancialTaxCalculator(FinancialCalculatorChain<?> chain) {

@@ -31,10 +31,8 @@ public class FinancialTransferScheduleServiceImpl implements FinancialTransferSc
 		if(scheduleFinancialTransfer.getTypeTransf() == null){
 			throw new TaxCalculationBusinessException("Transf type is null. Can't calculate tax.");
 		}
-		
-		calculator.calculate(scheduleFinancialTransfer);
-		
-		return null;		
+				
+		return calculator.calculate(scheduleFinancialTransfer);		
 	}
 
 	@Override

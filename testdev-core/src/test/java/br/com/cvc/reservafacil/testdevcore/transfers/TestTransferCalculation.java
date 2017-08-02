@@ -2,9 +2,11 @@ package br.com.cvc.reservafacil.testdevcore.transfers;
 
 import java.math.BigDecimal;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.cvc.reservafacil.testdevcore.exception.FinancialScheduleBusinessException;
@@ -19,21 +21,24 @@ import br.com.cvc.reservafacil.testdevcore.services.FinancialTransferScheduleSer
  * 1 de ago de 2017
  */
 @RunWith(SpringRunner.class)
+@SpringBootTest
 public class TestTransferCalculation {
 	
 	@Autowired
 	private FinancialTransferScheduleServiceImpl service;
+	private FinancialTransferScheduleDTO financialTransferScheduleDTO;
+	
+	@Before
+	public void init(){
+		financialTransferScheduleDTO = buildDTO();
+	}
 	
 	@Test
-	public void testTransferCalcTypeA(){
-		FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();
-		dto.setTypeTransf(TypeTransfEnum.A);
-		dto.setTransfValue(new BigDecimal("10000000"));
-		dto.setOrigenAcc("bill gates");
-		dto.setDestAcc("felipe");
-		
+	public void testTransferCalcTypeA(){		
 		try {
-			System.out.println(service.scheduleTransfer(dto));
+			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.A);
+			
+			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
 		} catch (FinancialScheduleBusinessException e) {
 			e.printStackTrace();
 		}
@@ -41,16 +46,44 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeB(){
-	
+		try {
+			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.B);
+			
+			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
+		} catch (FinancialScheduleBusinessException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testTransferCalcTypeC(){
-	
+		try {
+			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.C);
+			
+			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
+		} catch (FinancialScheduleBusinessException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Test
 	public void testTransferCalcTypeD(){
+		try {
+			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.D);
+			
+			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
+		} catch (FinancialScheduleBusinessException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	private FinancialTransferScheduleDTO buildDTO() {
+		FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();
+	
+		dto.setTransfValue(new BigDecimal("10000000"));
+		dto.setOrigenAcc("bill gates");
+		dto.setDestAcc("felipe");
+		
+		return dto;
 	}
 }
