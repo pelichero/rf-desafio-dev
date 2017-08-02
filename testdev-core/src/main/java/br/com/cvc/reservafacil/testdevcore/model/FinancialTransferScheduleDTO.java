@@ -10,7 +10,7 @@ import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
  *
  * 1 de ago de 2017
  */
-public class FinancialTransferScheduleDTO{
+public class FinancialTransferScheduleDTO implements Calculable{
 	
 	private String origenAcc;
 	private String destAcc;
@@ -49,7 +49,7 @@ public class FinancialTransferScheduleDTO{
 	public void setTax(Float tax) {
 		this.tax = tax;
 	}
-	
+
 	public TypeTransfEnum getTypeTransf() {
 		return typeTransf;
 	}
