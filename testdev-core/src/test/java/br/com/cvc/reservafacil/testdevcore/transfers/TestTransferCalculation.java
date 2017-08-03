@@ -1,8 +1,12 @@
 package br.com.cvc.reservafacil.testdevcore.transfers;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +52,7 @@ public class TestTransferCalculation {
 	public void testTransferCalcTypeB(){
 		try {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.B);
+			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 			
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
 		} catch (FinancialScheduleBusinessException e) {
@@ -59,7 +64,8 @@ public class TestTransferCalculation {
 	public void testTransferCalcTypeC(){
 		try {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.C);
-			
+			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(16).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
 		} catch (FinancialScheduleBusinessException e) {
 			e.printStackTrace();
@@ -67,6 +73,7 @@ public class TestTransferCalculation {
 	}
 	
 	@Test
+	@Ignore
 	public void testTransferCalcTypeD(){
 		try {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.D);
@@ -80,7 +87,7 @@ public class TestTransferCalculation {
 	private FinancialTransferScheduleDTO buildDTO() {
 		FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();
 	
-		dto.setTransfValue(new BigDecimal("10000000"));
+		dto.setTransfValue(new BigDecimal("100"));
 		dto.setOrigenAcc("bill gates");
 		dto.setDestAcc("felipe");
 		

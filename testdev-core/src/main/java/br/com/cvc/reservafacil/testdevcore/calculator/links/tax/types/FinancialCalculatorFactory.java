@@ -1,5 +1,6 @@
 package br.com.cvc.reservafacil.testdevcore.calculator.links.tax.types;
 
+import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 import org.springframework.stereotype.Component;
@@ -32,6 +33,34 @@ public class FinancialCalculatorFactory {
 			case D: return new FinancialTypeDCalculator();
 			default: throw new IllegalStateException(MessageFormat.format(NO_CALCULATOR_ERROR, type));
 		}
+	}
+	
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 * 
+	 * TODO refatorar
+	 */
+	public Calculator<FinancialTransferScheduleDTO> createCalculator(BigDecimal value){
+		
+		if(value == null){
+			throw new IllegalStateException("No value to calculate."); 
+		}
+		
+		if(value.doubleValue() <= 25000d){
+			return new FinancialTypeACalculator();
+		} 
+		
+		if(value.doubleValue() > 25000d && value.doubleValue() <= 120000d){
+			return new FinancialTypeBCalculator();
+		}
+		
+		if(value.doubleValue() > 120000d){
+			return new FinancialTypeCCalculator();
+		}
+		
+		throw new IllegalStateException("No value to calculate.");
 	}
 	
 }
