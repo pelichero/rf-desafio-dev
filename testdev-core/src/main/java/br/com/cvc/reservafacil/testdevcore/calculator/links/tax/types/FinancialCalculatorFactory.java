@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import br.com.cvc.reservafacil.testdevcore.calculator.Calculator;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
-import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
 
 /**
  * 
@@ -25,13 +24,17 @@ public class FinancialCalculatorFactory {
 	 * @param type
 	 * @return
 	 */
-	public Calculator<FinancialTransferScheduleDTO> createCalculator(TypeTransfEnum type){
-		switch (type) {
+	public Calculator<FinancialTransferScheduleDTO> createCalculator(FinancialTransferScheduleDTO dto){
+		if(dto == null){
+			throw new IllegalStateException("Error on creating calculator, financial transfer is null.");
+		}
+		
+		switch (dto.getTypeTransf()) {
 			case A: return new FinancialTypeACalculator();
 			case B: return new FinancialTypeBCalculator();
 			case C: return new FinancialTypeCCalculator();
-			case D: return new FinancialTypeDCalculator();
-			default: throw new IllegalStateException(MessageFormat.format(NO_CALCULATOR_ERROR, type));
+			case D: return createCalculator(dto.getTransfValue());
+			default: throw new IllegalStateException(MessageFormat.format(NO_CALCULATOR_ERROR, dto.getTypeTransf()));
 		}
 	}
 	
@@ -42,7 +45,7 @@ public class FinancialCalculatorFactory {
 	 * 
 	 * TODO refatorar
 	 */
-	public Calculator<FinancialTransferScheduleDTO> createCalculator(BigDecimal value){
+	private Calculator<FinancialTransferScheduleDTO> createCalculator(BigDecimal value){
 		
 		if(value == null){
 			throw new IllegalStateException("No value to calculate."); 

@@ -31,7 +31,7 @@ public class FinancialTaxCalculator extends FinancialCalculatorChain<FinancialTr
 
 	@Override
 	public FinancialTransferScheduleDTO calculate(FinancialTransferScheduleDTO dto) {
-		BigDecimal tax = factory.createCalculator(dto.getTypeTransf()).calculate(dto);
+		BigDecimal tax = factory.createCalculator(dto).calculate(dto);
 		
 		dto.setTax(tax.floatValue());
 		
