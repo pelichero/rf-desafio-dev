@@ -75,7 +75,7 @@ public class TestTransferCalculation {
 	public void testTransferCalcTypeD(){
 		try {
 			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(16).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-			financialTransferScheduleDTO.setTransfValue(new BigDecimal("25000"));
+			financialTransferScheduleDTO.setTransfValue(new BigDecimal("25001"));
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.D);
 			
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));

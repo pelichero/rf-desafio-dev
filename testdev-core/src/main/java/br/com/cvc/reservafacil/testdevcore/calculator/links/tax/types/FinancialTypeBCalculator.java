@@ -38,7 +38,7 @@ public class FinancialTypeBCalculator implements Calculator<FinancialTransferSch
 			throw new IllegalStateException(MessageFormat.format("Schedule date is null.", dto));
 		}
 	
-		return dto.getTransfValue().add(new BigDecimal(resolveTax(dto)));
+		return new BigDecimal(resolveTax(dto));
 	}
 
 	/**
