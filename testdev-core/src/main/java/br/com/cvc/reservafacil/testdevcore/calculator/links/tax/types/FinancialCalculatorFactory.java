@@ -17,6 +17,9 @@ import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 @Component
 public class FinancialCalculatorFactory {
 
+	private static final double C_TYPE_TAXES = 120000d;
+	private static final double B_TYPE_TAXES = 120000d;
+	private static final double A_TYPE_TAXES = 25000d;
 	private static final String NO_CALCULATOR_ERROR = "Theres no calculator for the type [{0}]";
 	
 	/**
@@ -51,15 +54,15 @@ public class FinancialCalculatorFactory {
 			throw new IllegalStateException("No value to calculate."); 
 		}
 		
-		if(value.doubleValue() <= 25000d){
+		if(value.doubleValue() <= A_TYPE_TAXES){
 			return new FinancialTypeACalculator();
 		} 
 		
-		if(value.doubleValue() > 25000d && value.doubleValue() <= 120000d){
+		if(value.doubleValue() > A_TYPE_TAXES && value.doubleValue() <= B_TYPE_TAXES){
 			return new FinancialTypeBCalculator();
 		}
 		
-		if(value.doubleValue() > 120000d){
+		if(value.doubleValue() > C_TYPE_TAXES){
 			return new FinancialTypeCCalculator();
 		}
 		
