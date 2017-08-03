@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
+import lombok.Data;
 
 /**
  * 
@@ -11,6 +12,7 @@ import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
  *
  * 1 de ago de 2017
  */
+@Data
 public class FinancialTransferScheduleDTO implements Calculable{
 	
 	private String origenAcc;
