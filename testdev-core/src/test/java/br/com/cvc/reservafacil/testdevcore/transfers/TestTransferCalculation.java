@@ -6,8 +6,10 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,11 +26,13 @@ import br.com.cvc.reservafacil.testdevcore.services.FinancialTransferScheduleSer
  * 1 de ago de 2017
  */
 @RunWith(SpringRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @SpringBootTest
 public class TestTransferCalculation {
 	
 	@Autowired
 	private FinancialTransferScheduleServiceImpl service;
+	
 	private FinancialTransferScheduleDTO financialTransferScheduleDTO;
 	
 	@Before
@@ -79,6 +83,15 @@ public class TestTransferCalculation {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.D);
 			
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
+		} catch (FinancialScheduleBusinessException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testTransferListAll(){
+		try {
+			System.out.println(service.listAllScheduledTransfers());
 		} catch (FinancialScheduleBusinessException e) {
 			e.printStackTrace();
 		}

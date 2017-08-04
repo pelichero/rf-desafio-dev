@@ -3,6 +3,7 @@ package br.com.cvc.reservafacil.testdevcore.services;
 import java.util.List;
 
 import br.com.cvc.reservafacil.testdevcore.exception.FinancialScheduleBusinessException;
+import br.com.cvc.reservafacil.testdevcore.model.Calculable;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 
 /**
@@ -18,13 +19,13 @@ public interface FinancialTransferScheduleService {
 	 * @param scheduleFinancialTransfer
 	 * @throws FinancialScheduleBusinessException
 	 */
-	public FinancialTransferScheduleDTO scheduleTransfer(FinancialTransferScheduleDTO scheduleFinancialTransfer) throws FinancialScheduleBusinessException;
+	public Calculable scheduleTransfer(FinancialTransferScheduleDTO scheduleFinancialTransfer) throws FinancialScheduleBusinessException;
 	
 	/**
 	 * 
 	 * @return
 	 * @throws FinancialScheduleBusinessException
 	 */
-	public List<FinancialTransferScheduleDTO> listAllScheduledTransfers() throws FinancialScheduleBusinessException;
+	public List<Calculable> listAllScheduledTransfers() throws FinancialScheduleBusinessException;
 	
 }

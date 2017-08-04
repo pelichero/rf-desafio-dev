@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import br.com.cvc.reservafacil.testdevcore.calculator.links.tax.FinancialTaxCalculator;
 import br.com.cvc.reservafacil.testdevcore.exception.FinancialScheduleBusinessException;
 import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculationBusinessException;
+import br.com.cvc.reservafacil.testdevcore.model.Calculable;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
+import br.com.cvc.reservafacil.testdevcore.repository.FinancialTransferRepository;
 
 /**
  * 
@@ -22,8 +24,11 @@ public class FinancialTransferScheduleServiceImpl implements FinancialTransferSc
 	@Autowired
 	private FinancialTaxCalculator calculator;
 	
+	@Autowired
+	private FinancialTransferRepository financialRepository;
+	
 	@Override
-	public FinancialTransferScheduleDTO scheduleTransfer(FinancialTransferScheduleDTO scheduleFinancialTransfer) throws FinancialScheduleBusinessException {
+	public Calculable scheduleTransfer(FinancialTransferScheduleDTO scheduleFinancialTransfer) throws FinancialScheduleBusinessException {
 		if(scheduleFinancialTransfer == null){
 			throw new IllegalStateException("Financial schedule is null.");
 		}
@@ -32,14 +37,16 @@ public class FinancialTransferScheduleServiceImpl implements FinancialTransferSc
 			throw new TaxCalculationBusinessException("Transf type is null. Can't calculate tax.");
 		}
 				
-		return calculator.calculate(scheduleFinancialTransfer);		
+		FinancialTransferScheduleDTO calculatedFinancialTransfer = calculator.calculate(scheduleFinancialTransfer);
+		
+		financialRepository.save(calculatedFinancialTransfer);
+		
+		return calculatedFinancialTransfer;		
 	}
 
 	@Override
-	public List<FinancialTransferScheduleDTO> listAllScheduledTransfers() throws FinancialScheduleBusinessException {
-
-
-		return null;
+	public List<Calculable> listAllScheduledTransfers() throws FinancialScheduleBusinessException {
+		return financialRepository.listAll();
 	}
 
 }
