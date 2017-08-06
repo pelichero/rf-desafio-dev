@@ -101,8 +101,7 @@ public class TestTransferCalculation {
 	}
 	
 	private FinancialTransferScheduleDTO buildDTO() {
-		FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();
-	
+		FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
 		dto.setTransfValue(new BigDecimal("100"));
 		dto.setOrigenAcc("bill gates");
 		dto.setDestAcc("felipe");

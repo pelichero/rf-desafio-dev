@@ -1,4 +1,4 @@
-package br.com.cvc.reservafacil.testdevcore.calculator.links.tax.types;
+package br.com.cvc.reservafacil.testdevcore.calculator.taxes;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import org.springframework.stereotype.Component;
 
 import br.com.cvc.reservafacil.testdevcore.calculator.Calculator;
+import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculatorException;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 
 /**
@@ -15,11 +16,13 @@ import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
  * 1 de ago de 2017
  */
 @Component
-public class FinancialCalculatorFactory {
+public class FinancialCalculatorTaxFactory {
 
 	private static final double C_TYPE_TAXES = 120000d;
 	private static final double B_TYPE_TAXES = 25001d;
 	private static final double A_TYPE_TAXES = 25000d;
+	private static final String NO_VALUE_TO_CALCULATE_MSG_ERROR = "No value to calculate.";
+	private static final String DTO_NULL_MSG_ERROR = "Error on creating calculator, financial transfer is null.";
 	private static final String NO_CALCULATOR_ERROR = "Theres no calculator for the type [{0}]";
 	
 	/**
@@ -27,9 +30,9 @@ public class FinancialCalculatorFactory {
 	 * @param type
 	 * @return
 	 */
-	public Calculator<FinancialTransferScheduleDTO> createCalculator(FinancialTransferScheduleDTO dto){
+	public Calculator<FinancialTransferScheduleDTO> createCalculator(FinancialTransferScheduleDTO dto) throws TaxCalculatorException{
 		if(dto == null){
-			throw new IllegalStateException("Error on creating calculator, financial transfer is null.");
+			throw new TaxCalculatorException(DTO_NULL_MSG_ERROR);
 		}
 		
 		switch (dto.getTypeTransf()) {
@@ -48,10 +51,10 @@ public class FinancialCalculatorFactory {
 	 * 
 	 * TODO refatorar
 	 */
-	private Calculator<FinancialTransferScheduleDTO> createCalculator(BigDecimal value){
+	private Calculator<FinancialTransferScheduleDTO> createCalculator(BigDecimal value) throws TaxCalculatorException{
 		
 		if(value == null){
-			throw new IllegalStateException("No value to calculate."); 
+			throw new TaxCalculatorException(NO_VALUE_TO_CALCULATE_MSG_ERROR); 
 		}
 		
 		if(value.doubleValue() <= A_TYPE_TAXES){
@@ -66,7 +69,7 @@ public class FinancialCalculatorFactory {
 			return new FinancialTypeCCalculator();
 		}
 		
-		throw new IllegalStateException("No value to calculate.");
+		throw new TaxCalculatorException(NO_VALUE_TO_CALCULATE_MSG_ERROR);
 	}
 	
 }

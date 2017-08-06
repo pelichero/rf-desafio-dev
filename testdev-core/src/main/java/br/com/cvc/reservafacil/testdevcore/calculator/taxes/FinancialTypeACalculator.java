@@ -1,9 +1,10 @@
-package br.com.cvc.reservafacil.testdevcore.calculator.links.tax.types;
+package br.com.cvc.reservafacil.testdevcore.calculator.taxes;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 
 import br.com.cvc.reservafacil.testdevcore.calculator.Calculator;
+import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculatorException;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 
 /**
@@ -14,16 +15,18 @@ import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
  */
 public class FinancialTypeACalculator implements Calculator<FinancialTransferScheduleDTO>{
 
+	private static final String NULL_TRANSFER_MSG_ERROR = "Financial transfer is null";
+
 	protected FinancialTypeACalculator() {}
 
 	private static final Float TAX = 2.0F;
 	private static final Float AMMOUNT_PERCENTAGE = 0.003F;
 	
 	@Override
-	public BigDecimal calculate(FinancialTransferScheduleDTO dto) {
+	public BigDecimal calculate(FinancialTransferScheduleDTO dto) throws TaxCalculatorException {
 		
 		if(dto == null){
-			throw new IllegalStateException(MessageFormat.format("Financial transfer is null", dto));
+			throw new TaxCalculatorException(MessageFormat.format(NULL_TRANSFER_MSG_ERROR, dto));
 		}
 		
 		if(dto.getTransfValue() == null){

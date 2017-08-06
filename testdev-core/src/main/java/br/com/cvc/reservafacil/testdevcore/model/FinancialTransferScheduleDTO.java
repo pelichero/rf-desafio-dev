@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
+import br.com.cvc.reservafacil.testdevcore.utils.DateUtils;
 
 /**
  * 
@@ -55,7 +56,7 @@ public class FinancialTransferScheduleDTO implements Calculable{
 	}
 	
 	public Date getScheduleDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
+		SimpleDateFormat sdf = new SimpleDateFormat(DateUtils.DATE_PATTERN);		
 		Date parsedDate = null;		
 		try {
 			parsedDate = sdf.parse(this.scheduleDate);

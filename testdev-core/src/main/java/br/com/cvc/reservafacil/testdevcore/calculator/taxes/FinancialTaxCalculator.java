@@ -1,12 +1,12 @@
-package br.com.cvc.reservafacil.testdevcore.calculator.links.tax;
+package br.com.cvc.reservafacil.testdevcore.calculator.taxes;
 
 import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.cvc.reservafacil.testdevcore.calculator.chain.FinancialCalculatorChain;
-import br.com.cvc.reservafacil.testdevcore.calculator.links.tax.types.FinancialCalculatorFactory;
+import br.com.cvc.reservafacil.testdevcore.calculator.FinancialCalculatorChain;
+import br.com.cvc.reservafacil.testdevcore.exception.CalculatorBusinessException;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 
 /**
@@ -19,7 +19,7 @@ import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 public class FinancialTaxCalculator extends FinancialCalculatorChain<FinancialTransferScheduleDTO>{
 
 	@Autowired
-	private FinancialCalculatorFactory factory;
+	private FinancialCalculatorTaxFactory factory;
 
 	public FinancialTaxCalculator(){
 		super(null);
@@ -30,7 +30,7 @@ public class FinancialTaxCalculator extends FinancialCalculatorChain<FinancialTr
 	}
 
 	@Override
-	public FinancialTransferScheduleDTO calculate(FinancialTransferScheduleDTO dto) {
+	public FinancialTransferScheduleDTO calculate(FinancialTransferScheduleDTO dto) throws CalculatorBusinessException {
 		BigDecimal tax = factory.createCalculator(dto).calculate(dto);
 		
 		dto.setTax(tax.floatValue());

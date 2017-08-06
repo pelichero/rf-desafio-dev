@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.cvc.reservafacil.testdevcore.calculator.links.tax.FinancialTaxCalculator;
+import br.com.cvc.reservafacil.testdevcore.calculator.taxes.FinancialTaxCalculator;
 import br.com.cvc.reservafacil.testdevcore.exception.FinancialScheduleBusinessException;
 import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculationBusinessException;
 import br.com.cvc.reservafacil.testdevcore.model.Calculable;

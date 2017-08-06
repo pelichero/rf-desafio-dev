@@ -12,6 +12,8 @@ import java.util.Date;
  * 3 de ago de 2017
  */
 public class DateUtils {
+	
+	public static final String DATE_PATTERN = "dd/MM/yyyy";
 
 	public static long daysBetween(Temporal start, Temporal end) {
 		return ChronoUnit.DAYS.between(start, end) * -1;

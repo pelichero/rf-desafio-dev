@@ -2,6 +2,8 @@ package br.com.cvc.reservafacil.testdevcore.calculator;
 
 import java.math.BigDecimal;
 
+import br.com.cvc.reservafacil.testdevcore.exception.CalculatorBusinessException;
+
 /**
  * 
  * @author felipe.pelichero
@@ -15,6 +17,6 @@ public interface Calculator<Calculable> {
 	 * @param dto
 	 * @return
 	 */
-	public BigDecimal calculate(Calculable dto);
+	public BigDecimal calculate(Calculable dto) throws CalculatorBusinessException;
 	
 }

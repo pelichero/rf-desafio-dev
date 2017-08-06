@@ -1,4 +1,4 @@
-package br.com.cvc.reservafacil.testdevcore.calculator.links.tax.types;
+package br.com.cvc.reservafacil.testdevcore.calculator.taxes;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
@@ -7,6 +7,7 @@ import java.util.NavigableMap;
 import java.util.TreeMap;
 
 import br.com.cvc.reservafacil.testdevcore.calculator.Calculator;
+import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculatorException;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
 import br.com.cvc.reservafacil.testdevcore.utils.DateUtils;
 
@@ -32,12 +33,15 @@ public class FinancialTypeCCalculator implements Calculator<FinancialTransferSch
 	}	
 	
 	protected FinancialTypeCCalculator() {}
-		
+	
+	private static final String NULL_TRANSFER_MSG_ERROR = "Financial transfer is null";
+	private static final String SCHEDULE_DATE_IS_NULL_MSG_ERROR = "Schedule date is null.";
+	
 	@Override
-	public BigDecimal calculate(FinancialTransferScheduleDTO dto) {
+	public BigDecimal calculate(FinancialTransferScheduleDTO dto) throws TaxCalculatorException{
 
 		if(dto == null){
-			throw new IllegalStateException(MessageFormat.format("Financial transfer is null.", dto));
+			throw new TaxCalculatorException(MessageFormat.format(NULL_TRANSFER_MSG_ERROR, dto));
 		}
 		
 		if(dto.getTransfValue() == null){
@@ -45,7 +49,7 @@ public class FinancialTypeCCalculator implements Calculator<FinancialTransferSch
 		}
 		
 		if(dto.getScheduleDate() == null){
-			throw new IllegalStateException(MessageFormat.format("Schedule date is null.", dto));
+			throw new TaxCalculatorException(MessageFormat.format(SCHEDULE_DATE_IS_NULL_MSG_ERROR, dto));
 		}
 		
 		return dto.getTransfValue().multiply(new BigDecimal(taxes.get(taxes.ceilingKey(daysBetween(dto)))));

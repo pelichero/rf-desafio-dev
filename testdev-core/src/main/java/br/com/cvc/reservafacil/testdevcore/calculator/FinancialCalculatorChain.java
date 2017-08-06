@@ -1,4 +1,7 @@
-package br.com.cvc.reservafacil.testdevcore.calculator.chain;
+package br.com.cvc.reservafacil.testdevcore.calculator;
+
+import br.com.cvc.reservafacil.testdevcore.exception.CalculatorBusinessException;
+import br.com.cvc.reservafacil.testdevcore.model.Calculable;
 
 /**
  * 
@@ -6,7 +9,7 @@ package br.com.cvc.reservafacil.testdevcore.calculator.chain;
  *
  * 2 de ago de 2017
  */
-public abstract class FinancialCalculatorChain<Calculable>{
+public abstract class FinancialCalculatorChain<T extends Calculable>{
 	
 	protected FinancialCalculatorChain<?> next;
 	protected Calculable calculated;
@@ -23,5 +26,5 @@ public abstract class FinancialCalculatorChain<Calculable>{
 		}
 	}
 	
-	public abstract Calculable calculate(Calculable dto);
+	public abstract T calculate(T dto) throws CalculatorBusinessException;
 }
