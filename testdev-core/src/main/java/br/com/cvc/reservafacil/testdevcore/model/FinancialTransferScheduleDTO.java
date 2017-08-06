@@ -1,6 +1,8 @@
 package br.com.cvc.reservafacil.testdevcore.model;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import br.com.cvc.reservafacil.testdevcore.model.enums.TypeTransfEnum;
@@ -17,7 +19,7 @@ public class FinancialTransferScheduleDTO implements Calculable{
 	private String destAcc;
 	private BigDecimal transfValue;
 	private Float tax;
-	private Date scheduleDate;
+	private String scheduleDate;
 	private TypeTransfEnum typeTransf;
 	
 	public String getOrigenAcc() {
@@ -53,10 +55,17 @@ public class FinancialTransferScheduleDTO implements Calculable{
 	}
 	
 	public Date getScheduleDate() {
-		return scheduleDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");		
+		Date parsedDate = null;		
+		try {
+			parsedDate = sdf.parse(this.scheduleDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} 		
+		return parsedDate;
 	}
 
-	public void setScheduleDate(Date scheduleDate) {
+	public void setScheduleDate(String scheduleDate) {
 		this.scheduleDate = scheduleDate;
 	}
 

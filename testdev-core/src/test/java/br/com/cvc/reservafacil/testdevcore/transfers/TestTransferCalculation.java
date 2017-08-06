@@ -2,6 +2,7 @@ package br.com.cvc.reservafacil.testdevcore.transfers;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
@@ -34,10 +35,12 @@ public class TestTransferCalculation {
 	private FinancialTransferScheduleServiceImpl service;
 	
 	private FinancialTransferScheduleDTO financialTransferScheduleDTO;
+	private SimpleDateFormat sdf;
 	
 	@Before
 	public void init(){
 		financialTransferScheduleDTO = buildDTO();
+		sdf = new SimpleDateFormat("dd/MM/yyyy");
 	}
 	
 	@Test
@@ -55,7 +58,7 @@ public class TestTransferCalculation {
 	public void testTransferCalcTypeB(){
 		try {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.B);
-			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			financialTransferScheduleDTO.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
 			
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
 		} catch (FinancialScheduleBusinessException e) {
@@ -67,7 +70,7 @@ public class TestTransferCalculation {
 	public void testTransferCalcTypeC(){
 		try {
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.C);
-			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(16).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			financialTransferScheduleDTO.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(16).atStartOfDay(ZoneId.systemDefault()).toInstant())));
 
 			System.out.println(service.scheduleTransfer(financialTransferScheduleDTO));
 		} catch (FinancialScheduleBusinessException e) {
@@ -78,7 +81,7 @@ public class TestTransferCalculation {
 	@Test
 	public void testTransferCalcTypeD(){
 		try {
-			financialTransferScheduleDTO.setScheduleDate(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+			financialTransferScheduleDTO.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
 			financialTransferScheduleDTO.setTransfValue(new BigDecimal("120001"));
 			financialTransferScheduleDTO.setTypeTransf(TypeTransfEnum.D);
 			
