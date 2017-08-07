@@ -69,7 +69,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeB_Ate_30_Dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=8.0, scheduleDate=08/07/2017, typeTransf=B]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(28).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=8.0, scheduleDate="+scheduledDate+", typeTransf=B]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -77,7 +79,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.B);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(29).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 			
 			service.scheduleTransfer(dto);
 			
@@ -90,7 +92,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeB_Apos_30_Dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=10.0, scheduleDate=06/07/2017, typeTransf=B]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=10.0, scheduleDate="+scheduledDate+", typeTransf=B]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -98,7 +102,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.B);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 			
 			service.scheduleTransfer(dto);
 			
@@ -111,7 +115,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_5_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=8.299999, scheduleDate=02/08/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=8.299999, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -119,7 +125,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(4).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -132,7 +138,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_10_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=7.4, scheduleDate=28/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(9).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=7.4, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -140,7 +148,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(9).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -153,7 +161,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_15_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=6.7000003, scheduleDate=23/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(14).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=6.7000003, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -161,7 +171,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(14).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -174,7 +184,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_20_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=5.4, scheduleDate=18/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(19).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=5.4, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -182,7 +194,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(19).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -195,7 +207,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_25_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=4.3, scheduleDate=13/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(24).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=4.3, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -203,7 +217,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(24).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -216,7 +230,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Ate_30_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=2.1, scheduleDate=08/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(29).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=2.1, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -224,7 +240,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(29).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -237,7 +253,9 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeC_Apos_30_dias(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=1.2, scheduleDate=06/07/2017, typeTransf=C]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=100, tax=1.2, scheduleDate="+scheduledDate+", typeTransf=C]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
@@ -245,7 +263,7 @@ public class TestTransferCalculation {
 			dto.setDestAcc(DEST_ACC);
 			dto.setTypeTransf(TypeTransfEnum.C);
 			dto.setTransfValue(new BigDecimal("100"));
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 
 			service.scheduleTransfer(dto);
 			
@@ -258,13 +276,15 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeD_Ate_25k(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=24999, tax=76.997, scheduleDate=06/07/2017, typeTransf=D]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=24999, tax=76.997, scheduleDate="+scheduledDate+", typeTransf=D]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
 			dto.setOrigenAcc(ORIGEN_ACC);
 			dto.setDestAcc(DEST_ACC);
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 			dto.setTransfValue(new BigDecimal("24999"));
 			dto.setTypeTransf(TypeTransfEnum.D);
 			
@@ -279,13 +299,15 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeD_Entre_25K_e_120k(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=80000, tax=10.0, scheduleDate=06/07/2017, typeTransf=D]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=80000, tax=10.0, scheduleDate="+scheduledDate+", typeTransf=D]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
 			dto.setOrigenAcc(ORIGEN_ACC);
 			dto.setDestAcc(DEST_ACC);
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 			dto.setTransfValue(new BigDecimal("80000"));
 			dto.setTypeTransf(TypeTransfEnum.D);
 			
@@ -300,13 +322,15 @@ public class TestTransferCalculation {
 	
 	@Test
 	public void testTransferCalcTypeD_Maior_120k(){
-		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=125000, tax=1500.0, scheduleDate=06/07/2017, typeTransf=D]";
+		String scheduledDate = sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+		
+		final String EXPECTED = "FinancialTransferScheduleDTO [origenAcc=bill gates, destAcc=felipe, transfValue=125000, tax=1500.0, scheduleDate="+scheduledDate+", typeTransf=D]";
 		
 		try {
 			FinancialTransferScheduleDTO dto = new FinancialTransferScheduleDTO();	
 			dto.setOrigenAcc(ORIGEN_ACC);
 			dto.setDestAcc(DEST_ACC);
-			dto.setScheduleDate(sdf.format(Date.from(LocalDate.now().minusDays(31).atStartOfDay(ZoneId.systemDefault()).toInstant())));
+			dto.setScheduleDate(scheduledDate);
 			dto.setTransfValue(new BigDecimal("125000"));
 			dto.setTypeTransf(TypeTransfEnum.D);
 			
