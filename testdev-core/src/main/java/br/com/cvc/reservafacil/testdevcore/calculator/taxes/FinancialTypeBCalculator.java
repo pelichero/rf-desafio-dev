@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.time.LocalDate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import br.com.cvc.reservafacil.testdevcore.calculator.Calculator;
 import br.com.cvc.reservafacil.testdevcore.exception.TaxCalculatorException;
 import br.com.cvc.reservafacil.testdevcore.model.FinancialTransferScheduleDTO;
@@ -17,6 +20,8 @@ import br.com.cvc.reservafacil.testdevcore.utils.DateUtils;
  */
 public class FinancialTypeBCalculator implements Calculator<FinancialTransferScheduleDTO>{
 
+	private final Logger Logger = LoggerFactory.getLogger(this.getClass());
+	
 	protected FinancialTypeBCalculator() {}
 	
 	private static final int DEAD_LINE = 30;
@@ -29,16 +34,20 @@ public class FinancialTypeBCalculator implements Calculator<FinancialTransferSch
 	
 	@Override
 	public BigDecimal calculate(FinancialTransferScheduleDTO dto) throws TaxCalculatorException{
+		Logger.debug(">>> Financial transfer type B chosed ");
 		
 		if(dto == null){
+			Logger.error(MessageFormat.format(NULL_TRANSFER_MSG_ERROR, dto));
 			throw new TaxCalculatorException(MessageFormat.format(NULL_TRANSFER_MSG_ERROR, dto));
 		}
 		
 		if(dto.getTransfValue() == null){
+			Logger.info("Tranfer ammount is null, setting it to zero");
 			return BigDecimal.ZERO;
 		}
 		
 		if(dto.getScheduleDate() == null){
+			Logger.info(MessageFormat.format(SCHEDULE_DATE_IS_NULL_MSG_ERROR, dto));
 			throw new TaxCalculatorException(MessageFormat.format(SCHEDULE_DATE_IS_NULL_MSG_ERROR, dto));
 		}
 	
