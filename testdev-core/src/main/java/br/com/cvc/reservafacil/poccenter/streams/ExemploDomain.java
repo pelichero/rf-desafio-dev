@@ -1,8 +1,7 @@
 package br.com.cvc.reservafacil.poccenter.streams;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 class SimpleDomain {
 
@@ -72,6 +71,28 @@ public class ExemploDomain{
         //domains.forEach(d -> System.out.println(d.getName()));
 
 
-        domains.stream().map(SimpleDomain::getName).forEach(d -> System.out.println(" - "+d));
+        domains.stream().map(SimpleDomain::getName).forEach(d -> System.out.println(d));
+
+        Optional<SimpleDomain> simpleDomain = domains.stream().filter(c -> c.getNumber() >= 10)
+                        .findAny();
+
+
+        simpleDomain.ifPresent(d -> System.out.println(d.getName()));
+
+
+        List<SimpleDomain> collection = domains.stream()
+                .filter(c -> c.getNumber() > 10)
+                .collect(Collectors.toList());
+
+        collection.forEach(System.out::println);
+
+        domains.stream()
+                .filter(c -> c.getNumber() > 10)
+                .collect(
+                        Collectors.toMap(
+                                c -> c.getName(),
+                                c -> c.getNumber()
+                        )
+                ).forEach((name, number) -> System.out.println(name + " - "+number));
     }
 }
